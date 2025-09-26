@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+    <header>
+        <h1>Expense Tracker Dashboard</h1>
+        <div id="logout-section">
+            <button onclick="logout()" ondblclick="window.location.href='index.html'">Logout</button>
+        </div>
+    </header>
+
+    <section class="form-section">
+        <h2>Add / Edit Expense</h2>
+        <form id="expense-form">
+            <input type="hidden" id="expense-id">
+            <input type="text" id="title" placeholder="Title" required>
+            <input type="number" id="amount" placeholder="Amount" required>
+            <input type="text" id="category" placeholder="Category" required>
+            <input type="date" id="date" required>
+            <button type="submit">Save</button>
+        </form>
+    </section>
+
+    <section class="filter-section">
+        <h2>Filters</h2>
+        <input type="text" id="filter-category" placeholder="Category">
+        <input type="date" id="start-date">
+        <input type="date" id="end-date">
+        <button onclick="applyFilters()">Apply Filter</button>
+        <button onclick="clearFilters()">Clear</button>
+    </section>
+
+    <section class="table-section">
+        <h2>Expenses</h2>
+        <table id="expense-table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Amount</th>
+                    <th>Category</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </section>
+
+    <section class="chart-section">
+        <h2>Charts</h2>
+        <canvas id="monthlyChart"></canvas>
+        <canvas id="yearlyChart"></canvas>
+    </section>
+
+    <section class="export-section">
+        <button onclick="exportToExcel()">Export to Excel</button>
+        <button onclick="exportToPDF()">Export to PDF</button>
+    </section>
+
+    <script src="js/main.js"></script>
+    <script src="charts/expenseCharts.js"></script>
+    <script>
+        const token = localStorage.getItem('token');
+        if (!token) {
+            window.location.href = 'login.html';
+        }
+
+        function logout() {
+            const confirmLogout = confirm('Are you sure you want to logout?');
+            if (confirmLogout) {
+                localStorage.removeItem('token');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>

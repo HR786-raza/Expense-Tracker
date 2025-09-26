@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Expense Tracker</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="home-container">
+        <h1>Welcome to Expense Tracker</h1>
+        <p>Manage your expenses with ease.</p>
+
+        <div class="button-group">
+            <button onclick="window.location.href='login.html'">Login</button>
+            <button onclick="window.location.href='signup.html'">Signup</button>
+            <button onclick="goToDashboard()">Dashboard</button>
+        </div>
+    </div>
+
+    <script>
+        function goToDashboard() {
+            const token = localStorage.getItem('token');
+            if (token) {
+                window.location.href = 'dashboard.html';
+            } else {
+                alert('Please login first!');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+</body>
+
+</html>
